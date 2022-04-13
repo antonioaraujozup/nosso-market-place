@@ -35,6 +35,10 @@ public class Produto {
     public Produto() {
     }
 
+    public Boolean temStatusIgualA(StatusProduto statusProduto) {
+        return this.status == statusProduto;
+    }
+
     public Long getId() {
         return id;
     }
