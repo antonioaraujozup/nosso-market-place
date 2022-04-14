@@ -42,4 +42,8 @@ public class Produto {
     public Long getId() {
         return id;
     }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 }
