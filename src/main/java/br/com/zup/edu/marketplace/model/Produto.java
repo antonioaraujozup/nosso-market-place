@@ -85,4 +85,8 @@ public class Produto {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    public void remover(Usuario usuario) {
+        this.usuarios.remove(usuario);
+    }
 }

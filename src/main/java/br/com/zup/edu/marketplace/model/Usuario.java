@@ -66,4 +66,9 @@ public class Usuario {
     public boolean constaNaListaDeDesejos(Produto produto) {
         return this.listaDesejos.contains(produto);
     }
+
+    public void removerDaListaDeDesejos(Produto produto) {
+        produto.remover(this);
+        this.listaDesejos.remove(produto);
+    }
 }
