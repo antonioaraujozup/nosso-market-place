@@ -1,8 +1,10 @@
 package br.com.zup.edu.marketplace.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 public class NotaFiscal {
@@ -28,4 +30,21 @@ public class NotaFiscal {
     @Deprecated
     public NotaFiscal() {
     }
+
+    public BigDecimal calculaValorFinal() {
+        BigDecimal valorFinal = this.itens.stream()
+                .map(i -> i.getPreco())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return valorFinal;
+    }
+
+    public Usuario getDestinatario() {
+        return destinatario;
+    }
+
+    public List<Produto> getItens() {
+        return itens;
+    }
+
 }
