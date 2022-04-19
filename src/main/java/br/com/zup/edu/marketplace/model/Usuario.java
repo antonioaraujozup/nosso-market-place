@@ -1,6 +1,8 @@
 package br.com.zup.edu.marketplace.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -19,6 +21,9 @@ public class Usuario {
 
     @Column(nullable = false)
     private String telefone;
+
+    @ManyToMany
+    private List<Produto> listaDesejos = new ArrayList<>();
 
     public Usuario(String nome, String cpf, String endereco) {
         this.nome = nome;
@@ -51,5 +56,14 @@ public class Usuario {
 
     public String getTelefone() {
         return telefone;
+    }
+
+    public void adicionarNaListaDeDesejos(Produto produto) {
+        produto.adicionar(this);
+        this.listaDesejos.add(produto);
+    }
+
+    public boolean constaNaListaDeDesejos(Produto produto) {
+        return this.listaDesejos.contains(produto);
     }
 }

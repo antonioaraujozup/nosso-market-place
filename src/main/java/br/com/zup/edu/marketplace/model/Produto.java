@@ -2,6 +2,9 @@ package br.com.zup.edu.marketplace.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Produto {
@@ -21,6 +24,9 @@ public class Produto {
 
     @Column(nullable = false)
     private BigDecimal preco;
+
+    @ManyToMany(mappedBy = "listaDesejos")
+    private List<Usuario> usuarios = new ArrayList<>();
 
     public Produto(String titulo, String descricao, BigDecimal preco) {
         this.titulo = titulo;
@@ -61,5 +67,22 @@ public class Produto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public void adicionar(Usuario usuario) {
+        this.usuarios.add(usuario);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Produto produto = (Produto) o;
+        return Objects.equals(id, produto.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
